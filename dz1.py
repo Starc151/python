@@ -34,8 +34,19 @@ def task4():
         case _:
             print('Такой четверти нет')
 
+def task5():
+    aXY = list(map(int, input('ВВедите координаты точки A: ').split()))
+    bXY = list(map(int, input('ВВедите координаты точки B: ').split()))
+    aX = aXY[0]
+    aY = aXY[1]
+    bX = bXY[0]
+    bY = bXY[1]
+    ab = ((bX - aX)**2 + (bY -aY)**2)**0.5
+    ab = "{0:.2f}".format(ab)
+    print(f'Расстояние между точками А и В: {ab}')
 
 
 # task1()
 # task3()
-task4()
+# task4()
+task5()
