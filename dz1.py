@@ -7,6 +7,20 @@ def task1():
     else :
         print('нет такого дня')
 
+def task2():
+    # Не уверен, что рпавльно понял, что нужно сделать
+    def isEqual(x , y, z):
+        # ¬(X ⋁ Y ⋁ Z) = ¬X ⋀ ¬Y ⋀ ¬Z
+        left = not (x or y or z)
+        right = not x and not y and not z
+        return left == right
+    for x in 1, 0:
+        for y in 1, 0:
+            for z in 1, 0:
+                result = isEqual(x, y, z)
+                print(f'{x} {y} {z} {result}')
+
+
 def task3():
     xy = list(map(int, input('Введите X и Y: ').split()))
     x = xy[0]
@@ -46,7 +60,8 @@ def task5():
     print(f'Расстояние между точками А и В: {ab}')
 
 
-# task1()
-# task3()
-# task4()
+task1()
+task2()
+task3()
+task4()
 task5()
