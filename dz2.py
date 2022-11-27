@@ -1,5 +1,16 @@
 import math
 import random
+def task1():
+    sum = 0
+    num = input('Введите число: ')
+    for i in num:
+# если if написать в 1 условие if i != "." or "-", то почему-то выдает ошибку
+# припроверке на условие, укзанное вторым?
+        if i != ".":
+            if i != "-":
+                sum += int(i)
+        
+    print(sum)
 
 
 def task2():
@@ -24,6 +35,8 @@ def task5():
     print(data)
     random.shuffle(data)
     print(data)
+
+# task1()
 # task2()
 # task3()
 # task5()
