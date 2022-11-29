@@ -1,3 +1,4 @@
+from audioop import reverse
 import math
 import random
 def createList():
@@ -37,6 +38,35 @@ def task3():
     r = round(max(dataFloat) - min(dataFloat), 2)
     print(f"Разница между макс и мин значением дробной части элементов: {r}")
 
+def task4():
+    num = int(input('Введите число: '))
+    print(f"Это число в двоичной системе: {bin(num)[2:]}")
+
+def task5():
+    # F(−n) = (−1)**(n+1)*Fn
+    num = int(input('Введите число: '))
+    fibList = []
+    for i in range(1, num+1):
+        fibList.append(fib(i))
+    tmp = []
+    for i in range(len(fibList)):
+        tmp.append(fibList[i])
+        if i%2!=0:
+            tmp[i]*= -1
+    tmp.append(0)
+    tmp.append()
+    # fibList.reverse()
+    print(tmp)
+def fib(num):
+    # F(−n) = (−1)**(n+1)*Fn
+    if num in [1, 2]:
+        return 1
+    else:
+        return fib(num-2) + fib(num-1) 
+    
+
 # task1()
 # task2()
 # task3()
+# task4()
+task5()
