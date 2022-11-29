@@ -45,18 +45,21 @@ def task4():
 def task5():
     # F(−n) = (−1)**(n+1)*Fn
     num = int(input('Введите число: '))
-    fibList = []
+    fibList0toN = [0]
     for i in range(1, num+1):
-        fibList.append(fib(i))
-    tmp = []
-    for i in range(len(fibList)):
-        tmp.append(fibList[i])
+        fibList0toN.append(fib(i))
+    print(f"Ряд Фибоначчи по числу {num}: {fibList0toN}")
+
+    fibListNto1 = []
+    for i in range(len(fibList0toN)-1):
+        fibListNto1.append(fibList0toN[i+1])
         if i%2!=0:
-            tmp[i]*= -1
-    tmp.append(0)
-    tmp.append()
-    # fibList.reverse()
-    print(tmp)
+            fibListNto1[i]*= -1
+    print(fibListNto1)
+    fibListNto1.reverse()
+    fibList = fibListNto1 + fibList0toN
+    print(f"Ряд Негафибоначчи по числу {num}: {fibList}")
+
 def fib(num):
     # F(−n) = (−1)**(n+1)*Fn
     if num in [1, 2]:
