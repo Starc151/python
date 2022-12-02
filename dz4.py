@@ -1,4 +1,15 @@
+import math
 import dz3
+
+def task1():
+    d = float(input('Введите число для определения точности: '))
+    d  = str(d)
+    d = len(d)
+    t = str(math.pi)
+    t = t[:2]
+    s = str(math.pi)
+    s = s[2:d]
+    print(f"Число Пи c заданной точностью d: {t+s}")
 
 def task2():
     num = int(input('Введите число для вычисления простых множителей: '))
@@ -22,5 +33,6 @@ def task3():
             newList.append(i)
     print(f"Список неповторяющихся элементов: {newList}")
 
+task1()
 # task2()
-task3()
+# task3()
