@@ -1,5 +1,8 @@
 import math
+import random
+import sympy
 import dz3
+from sympy import *
 
 def task1():
     d = float(input('Введите число для определения точности: '))
@@ -33,6 +36,33 @@ def task3():
             newList.append(i)
     print(f"Список неповторяющихся элементов: {newList}")
 
-task1()
+def task4():
+    k = int(input("Введите натуральную степень k: "))
+    listKoef = [random.randint(0, 101) for i in range(k+1)]
+    print(f"Список случайных коэффициентов: {listKoef}")
+    ln = len(listKoef)
+    polynom = ""
+    for i in range(ln):
+        if ln-1-i == 1:
+            polynom += str(listKoef[i])+'x+'
+        elif ln-1-i == 0:
+            polynom += str(listKoef[i])
+        else:
+            polynom += str(listKoef[i])+'x**'+str(ln-1-i)+'+'
+    print(f"Многочлен степени {k}: {polynom}")
+    with open('forDz4Task4.txt', 'w') as data:
+        data.write(polynom)
+
+def task5():
+    x = sympy.Symbol('x')
+    m1 = open('task5_1.txt', 'r')
+    m2 = open('task5_2.txt', 'r')
+    exp1 = sympy.sympify(*m1)
+    exp2 = sympy.sympify(*m2)
+    print(exp1 + exp2)
+
+# task1()
 # task2()
 # task3()
+task4()
+# task5()
