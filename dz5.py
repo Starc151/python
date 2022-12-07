@@ -11,7 +11,8 @@ def gameXO():
     print("Карта игры:")
     printList(mapGame)
     move1 = human
-    move2 = comp
+    # move2 = compRand
+    move2 = compVeryEasy
     if move == 1:
         print("Вы ходите первым")
     else:
@@ -46,9 +47,26 @@ def human(mapping, freePosition):
     printList(mapping)
     victory(mapping, 'x')
 
-def comp(mapping, freePosition):
+def compRand(mapping, freePosition):
     print("Ход компьютера...")
     dlp = random.choice(freePosition)
+    mapping[dlp] = 'o'
+    freePosition.remove(dlp)
+    printList(mapping)
+    victory(mapping, 'o')
+
+def compVeryEasy(mapping, freePosition):
+    v = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+    print("Ход компьютера...")
+    dlp = random.choice(freePosition)
+    random.shuffle(v)
+    for i in v:
+        if   mapping[i[0]] == mapping[i[1]] and mapping[i[2]] == '_':
+            dlp = i[2]
+        elif mapping[i[0]] == mapping[i[2]] and mapping[i[1]] == '_':
+            dlp = i[1]
+        elif mapping[i[1]] == mapping[i[2]] and mapping[i[0]] == '_':
+            dlp = i[0]
     mapping[dlp] = 'o'
     freePosition.remove(dlp)
     printList(mapping)
