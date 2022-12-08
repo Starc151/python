@@ -64,22 +64,22 @@ def comp(mapping, freePosition):
     dlp = random.choice(freePosition)
     v = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
     random.shuffle(v)
+    if difficulty == 2:
+        for i in v:
+            if mapping[i[0]] == mapping[i[1]] == 'x' and mapping[i[2]] == '_':
+                dlp = i[2]
+            elif mapping[i[0]] == mapping[i[2]] == 'x' and mapping[i[1]] == '_':
+                dlp = i[1]
+            elif mapping[i[1]] == mapping[i[2]] == 'x' and mapping[i[0]] == '_':
+                dlp = i[0]
     if difficulty > 1:
         for i in v:
-            if mapping[i[0]] == mapping[i[1]] and mapping[i[2]] == '_':
+            if mapping[i[0]] == mapping[i[1]] == 'o' and mapping[i[2]] == '_':
                 dlp = i[2]
-            elif mapping[i[0]] == mapping[i[2]] and mapping[i[1]] == '_':
+            elif mapping[i[0]] == mapping[i[2]] == 'o' and mapping[i[1]] == '_':
                 dlp = i[1]
-            elif mapping[i[1]] == mapping[i[2]] and mapping[i[0]] == '_':
+            elif mapping[i[1]] == mapping[i[2]] == 'o' and mapping[i[0]] == '_':
                 dlp = i[0]
-        if difficulty == 2:
-            for i in v:
-                if mapping[i[0]] == mapping[i[1]] == 'x' and mapping[i[2]] == '_':
-                    dlp = i[2]
-                elif mapping[i[0]] == mapping[i[2]] == 'x' and mapping[i[1]] == '_':
-                    dlp = i[1]
-                elif mapping[i[1]] == mapping[i[2]] == 'x' and mapping[i[0]] == '_':
-                    dlp = i[0]
     mapping[dlp] = 'o'
     freePosition.remove(dlp)
     printList(mapping)
