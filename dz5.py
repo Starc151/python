@@ -6,27 +6,42 @@ root = Tk()
 root.title('Крестики и Нолики')
 root.geometry('440x440')
 
-games = Canvas(root, width='390', height='390', bg='red')
-games.place(x=25, y=25)
+mapGame = Canvas(root, width='390', height='390', bg='orange')
+mapGame.place(x=25, y=25)
 for i in range(0, 9):
     x = i // 3 * 130
     y = i % 3 * 130
-    games.create_rectangle(x+3, y+3, x + 130, y + 130,
+    mapGame.create_rectangle(x+3, y+3, x + 130, y + 130,
                                         width = 3,
                                         outline = '#A5A5A5',
                                         fill = '#CCCCCC',
                                         activefill = '#FFFAFA')
 
+def printX(col, row):
+    x = 25 + 130 * col
+    y = 25 + 130 * row
+    mapGame.create_line(x, y, x + 80, y + 80, width=10, fill='green')
+    mapGame.create_line(x, y + 80, x + 80, y, width=10, fill='green')
+
+def click(event):
+    col = event.x // 130
+    row = event.y // 130
+    printX(col, row)
+
+mapGame.bind('<Button-1>', click)
+
+def printO(colum, row):
+    x = 25 + 130 * colum
+    y = 25 + 130 * row
+    mapGame.create_oval(x, y, x + 80, y + 80, width = 10, outline = '#CC5500')
 
 root.mainloop()
 # def gameXO():
 #     mapping = ['_']*9
 #     freePosition = list(range(0, 9))
-#     mapGame = list(range(1, 10))
-#     mapGame = "".join(map(str, mapGame))
 #     move = random.randint(0,1)
 #     print("Карта игры:")
-#     printList(mapGame)
+#     printList("".join(map(str, list(range(1, 10)))))
 #     selectDifficulty()
 #     move1 = human
 #     move2 = comp
