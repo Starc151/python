@@ -1,12 +1,20 @@
 import random
 import sys
+import time
 from tkinter import *
+import tkinter.messagebox
 
-root = Tk()
-root.title('Крестики и Нолики')
-root.geometry('440x440')
+game = tkinter.Tk()
+game.title('Крестики и Нолики')
+game.geometry('440x440')
 
-mapGame = Canvas(root, width='390', height='390', bg='orange')
+firstMove = random.randint(0,1)
+if firstMove == 0:
+    tkinter.messagebox.showinfo("", "Первым ходите вы")
+else:
+    tkinter.messagebox.showinfo("", "Первым ходит компьютер")
+
+mapGame = Canvas(game, width='390', height='390', bg='orange')
 mapGame.place(x=25, y=25)
 for i in range(0, 9):
     x = i // 3 * 130
@@ -17,25 +25,37 @@ for i in range(0, 9):
                                         fill = '#CCCCCC',
                                         activefill = '#FFFAFA')
 
-def printX(col, row):
-    x = 25 + 130 * col
-    y = 25 + 130 * row
-    mapGame.create_line(x, y, x + 80, y + 80, width=10, fill='green')
-    mapGame.create_line(x, y + 80, x + 80, y, width=10, fill='green')
+statusGame = ['']*9
+freePosition = list(range(0, 9))
 
-def click(event):
+def humanMove(event):
     col = event.x // 130
     row = event.y // 130
-    printX(col, row)
+    index = col + row * 3
+    if statusGame[index] == '':
+        x = 25 + 130 * col
+        y = 25 + 130 * row
+        mapGame.create_line(x, y, x + 80, y + 80, width=10, fill='green')
+        mapGame.create_line(x, y + 80, x + 80, y, width=10, fill='green')
+        statusGame[index]  = "x"
+        freePosition.remove(index)
+        game.after(500, compMove)
 
-mapGame.bind('<Button-1>', click)
-
-def printO(colum, row):
-    x = 25 + 130 * colum
+def compMove():
+    comp = random.choice(freePosition)
+    col = comp % 3
+    row = comp // 3
+    x = 25 + 130 * col
     y = 25 + 130 * row
     mapGame.create_oval(x, y, x + 80, y + 80, width = 10, outline = '#CC5500')
+    statusGame[comp]  = "o"
+    freePosition.remove(comp)
 
-root.mainloop()
+if firstMove == 1:
+    game.after(500, compMove)
+
+mapGame.bind('<Button-1>', humanMove)
+game.mainloop()
 # def gameXO():
 #     mapping = ['_']*9
 #     freePosition = list(range(0, 9))
@@ -74,24 +94,7 @@ root.mainloop()
 #         print("|".join(list)[:5])
 #         print("|".join(list)[6:11])
 #         print("|".join(list)[12:].replace('_', ' '))
-
-# def human(mapping, freePosition):
-#     pos = input('Куда поствить "x"? ')
-#     if pos.isalpha():
-#         print('Введите число!')
-#         return human(mapping, freePosition)
-#     pos = int(pos)-1   
-#     if 9 <= pos or pos < 0:
-#         print('Недопустимое значение!')
-#         return human(mapping, freePosition)
-#     if mapping[pos] != '_':
-#         print('Это меcто уже занято!')
-#         return human(mapping, freePosition)
-#     mapping[pos] = 'x'
-#     freePosition.remove(pos)
-#     printList(mapping)
-#     victory(mapping, 'x')
-
+# 
 # def comp(mapping, freePosition):
 #     print("Ход компьютера...")
 #     dlp = random.choice(freePosition)
